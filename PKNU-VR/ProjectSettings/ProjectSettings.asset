@@ -129,8 +129,10 @@ PlayerSettings:
     Others: 1
   bundleVersion: 0.1
   preloadedAssets:
-  - {fileID: 11400000, guid: 25a4616ad2be73f4495da61ab7afae1d, type: 2}
-  - {fileID: 8215711076309464012, guid: 777d6b1268ae7f34f958d21e4ba2db91, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 11400000, guid: 2192a3c5b67d1c848821fa5a12f361b7, type: 2}
+  - {fileID: 1671742770318772863, guid: 6567a917383d2124a94fc0d00a2a26de, type: 2}
   metroInputSource: 0
   wsaTransparentSwapchain: 0
   m_HolographicPauseOnTrackingLoss: 1
@@ -153,7 +155,7 @@ PlayerSettings:
     Standalone: 0
     iPhone: 0
     tvOS: 0
-  overrideDefaultApplicationIdentifier: 0
+  overrideDefaultApplicationIdentifier: 1
   AndroidBundleVersionCode: 1
   AndroidMinSdkVersion: 23
   AndroidTargetSdkVersion: 0
