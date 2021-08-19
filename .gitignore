@@ -9,6 +9,7 @@ PKNU-VR/[Bb]uild/
 PKNU-VR/[Bb]uilds/
 PKNU-VR/[Ll]ogs/
 PKNU-VR/[Mm]emoryCaptures/
+PKNU-VR/[Aa]ssets/[Nn]atureManufacture Assets/
 
 # Asset meta data should only be ignored when the corresponding asset is also ignored
 !PKNU-VR/[Aa]ssets/**/*.meta
