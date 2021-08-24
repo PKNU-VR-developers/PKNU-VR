@@ -13,7 +13,6 @@ public class PlayerAnimation : MonoBehaviour
         _animator = GetComponentInChildren<Animator>();
         _Vector2 = new Vector2(0, 0);
         _DefaultAngularVector2 = new Vector2(1, 0);
-        Debug.Log("start position:" + gameObject.transform.parent.gameObject.transform.position.y);
     }
 
     // Update is called once per frame
@@ -25,12 +24,6 @@ public class PlayerAnimation : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F) || OVRInput.GetDown(OVRInput.Button.One))
         {
             _animator.SetBool("Jump", true);
-        }
-
-        if (gameObject.transform.parent.gameObject.transform.position.y < 1.7)
-        {
-            Debug.Log("grounded");
-            _animator.SetBool("Jump", false);
         }
         if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W) || (Vector2.Distance(OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick), _Vector2) > 0.1 && Vector2.SignedAngle(OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick), _DefaultAngularVector2) <= -67.5) && Vector2.SignedAngle(OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick), _DefaultAngularVector2) > -112.5)
         {
