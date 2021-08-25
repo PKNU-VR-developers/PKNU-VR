@@ -29,7 +29,7 @@ public class PlayerMovement : MonoBehaviour {
         {
 
             yVelocity = -gravity * Time.deltaTime;
-            if (Input.GetKeyDown(KeyCode.C))
+            if (Input.GetKeyDown(KeyCode.Space))
             {
                 yVelocity = jumpPower;
             }
