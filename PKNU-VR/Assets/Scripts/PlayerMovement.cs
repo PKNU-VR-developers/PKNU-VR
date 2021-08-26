@@ -48,8 +48,13 @@ public class PlayerMovement : MonoBehaviour {
 
         controller.Move(dir * speed * Time.deltaTime);
 
+        if (Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift))
+            speed = speed * 1.5f;
 
-         
+        if (Input.GetKeyUp(KeyCode.LeftShift)||Input.GetKeyUp(KeyCode.RightShift))
+            speed = 5f;
+
+
     }
 }
  
