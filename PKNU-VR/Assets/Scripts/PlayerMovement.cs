@@ -6,7 +6,7 @@ public class PlayerMovement : MonoBehaviour {
 
     public float speed = 5f;
     public float yVelocity = 0;
-    public float gravity = -9.8f;
+    public float gravity = -1.8f;
     public float jumpPower = 205f;
     private float h;
     private float v;
@@ -25,17 +25,9 @@ public class PlayerMovement : MonoBehaviour {
 
     void Update()
     {
-        if (controller.isGrounded)
-        {
 
-            yVelocity = -gravity * Time.deltaTime;
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                yVelocity = jumpPower;
-            }
-        }
-        else
-        {
+        if (!controller.isGrounded)
+        { 
             yVelocity -= gravity * Time.deltaTime;
         }
           
@@ -55,6 +47,12 @@ public class PlayerMovement : MonoBehaviour {
             speed = 5f;
 
 
+    }
+    public void Jumping()
+    {
+        yVelocity = -gravity * Time.deltaTime;
+        yVelocity = jumpPower;
+        Debug.Log("playing");
     }
 }
  
