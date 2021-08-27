@@ -1,0 +1,24 @@
+ManifestFileVersion: 0
+CRC: 3718649075
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 05d59c8b920974ea8c75efdc2c3369a9
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 0aa1ac53fab88f9e9224fb5c88ff75c2
+HashAppended: 0
+ClassTypes:
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 156
+  Script: {instanceID: 0}
+- Class: 1953259897
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
+Assets:
+- Assets/New Terrain.asset
+Dependencies:
+- D:/PKNU-VR/PKNU-VR/PKNU-VR/OVRAssetBundles/OVRMasterBundle/asset_terrainlayer0
