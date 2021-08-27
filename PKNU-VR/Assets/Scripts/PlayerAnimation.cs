@@ -24,14 +24,14 @@ public class PlayerAnimation : MonoBehaviour
 
 
     {
-        if (characterController.isGrounded && Input.GetKeyDown(KeyCode.Space)) //|| OVRInput.GetDown(OVRInput.Button.One))
+        if (characterController.isGrounded && (Input.GetKeyDown(KeyCode.Space) || OVRInput.GetDown(OVRInput.Button.One))) 
         {
             gameObject.transform.root.gameObject.GetComponent<PlayerMovement>().Jumping();
             _animator.SetBool("Jump", true);
         }
-        if (Input.GetKeyUp(KeyCode.Space) || OVRInput.GetUp(OVRInput.Button.One))
+        else if (_animator.GetBool("Jump") && characterController.isGrounded)
         {
-          _animator.SetBool("Jump", false);
+            _animator.SetBool("Jump", false);
         }
         if (Input.GetKeyDown(KeyCode.W)|| Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.D))
             {

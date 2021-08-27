@@ -4,10 +4,10 @@ using UnityEngine;
  
 public class PlayerMovement : MonoBehaviour {
 
-    public float speed = 5f;
+    public float speed = 3f;
     public float yVelocity = 0;
-    public float gravity = -1.8f;
-    public float jumpPower = 205f;
+    public float gravity = -15f;
+    public float jumpPower = 5f;
     private float h;
     private float v;
 
@@ -18,9 +18,7 @@ public class PlayerMovement : MonoBehaviour {
 
     void Start()
     {
-
-                controller = GetComponent<CharacterController>();
-
+        controller = GetComponent<CharacterController>();
     }
 
     void Update()
@@ -48,11 +46,11 @@ public class PlayerMovement : MonoBehaviour {
 
 
     }
-    public void Jumping()
+    public void Jumping() // This function will be called from PlayerAnimation Script
     {
         yVelocity = -gravity * Time.deltaTime;
         yVelocity = jumpPower;
-        Debug.Log("playing");
     }
+
 }
  
