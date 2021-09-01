@@ -37,7 +37,7 @@ public class OVRPlayerController : MonoBehaviour
 	/// <summary>
 	/// The force applied to the character when jumping.
 	/// </summary>
-	public float JumpForce;
+	public float JumpForce = 0.3f;
 
 	/// <summary>
 	/// The rate of rotation when using a gamepad.
@@ -143,8 +143,6 @@ public class OVRPlayerController : MonoBehaviour
 	protected CharacterController Controller = null;
 	protected OVRCameraRig CameraRig = null;
 
-	//To implement Sprint 
-	private Vector2 _Vector2;
 	private float MoveScale = 1.0f;
 	private Vector3 MoveThrottle = Vector3.zero;
 	private float FallSpeed = 0.0f;
@@ -160,18 +158,19 @@ public class OVRPlayerController : MonoBehaviour
 	private float buttonRotation = 0f;
 	private bool ReadyToSnapTurn; // Set to true when a snap turn has occurred, code requires one frame of centered thumbstick to enable another snap turn.
 	private bool playerControllerEnabled = false;
+
 	void Start()
 	{
 		// Add eye-depth as a camera offset from the player controller
 		var p = CameraRig.transform.localPosition;
 		p.z = OVRManager.profile.eyeDepth;
 		CameraRig.transform.localPosition = p;
-		
 	}
 
 	void Awake()
 	{
 		Controller = gameObject.GetComponent<CharacterController>();
+
 		if (Controller == null)
 			Debug.LogWarning("OVRPlayerController: No CharacterController attached.");
 
@@ -209,7 +208,6 @@ public class OVRPlayerController : MonoBehaviour
 
 	void Update()
 	{
-
 		if (!playerControllerEnabled)
 		{
 			if (OVRManager.OVRManagerinitialized)
@@ -314,7 +312,6 @@ public class OVRPlayerController : MonoBehaviour
 		Controller.Move(moveDirection);
 		Vector3 actualXZ = Vector3.Scale(Controller.transform.localPosition, new Vector3(1, 0, 1));
 
-
 		if (predictedXZ != actualXZ)
 			MoveThrottle += (actualXZ - predictedXZ) / (SimulationRate * Time.deltaTime);
 	}
@@ -357,25 +354,22 @@ public class OVRPlayerController : MonoBehaviour
 				MoveScale = 0.70710678f;
 
 			// No positional movement if we are in the air
-			//if (!Controller.isGrounded)
-				//MoveScale = 0.0f;
+			if (!Controller.isGrounded)
+				MoveScale = 0.0f;
 
 			MoveScale *= SimulationRate * Time.deltaTime;
 
 			// Compute this for key movement
-			float moveInfluence = Acceleration * 0.2f * MoveScale * MoveScaleMultiplier;
+			float moveInfluence = Acceleration * 0.1f * MoveScale * MoveScaleMultiplier;
 
 			// Run!
-			_Vector2 = new Vector2(0, 0);
 			if (dpad_move || Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
 				moveInfluence *= 2.0f;
-				
+
 			Quaternion ort = transform.rotation;
 			Vector3 ortEuler = ort.eulerAngles;
 			ortEuler.z = ortEuler.x = 0f;
 			ort = Quaternion.Euler(ortEuler);
-
-			if (Input.GetKey(KeyCode.F)) Jump();
 
 			if (moveForward)
 				MoveThrottle += ort * (transform.lossyScale.z * moveInfluence * Vector3.forward);
@@ -385,7 +379,9 @@ public class OVRPlayerController : MonoBehaviour
 				MoveThrottle += ort * (transform.lossyScale.x * moveInfluence * BackAndSideDampen * Vector3.left);
 			if (moveRight)
 				MoveThrottle += ort * (transform.lossyScale.x * moveInfluence * BackAndSideDampen * Vector3.right);
-			
+
+
+
 			moveInfluence = Acceleration * 0.1f * MoveScale * MoveScaleMultiplier;
 
 #if !UNITY_ANDROID // LeftTrigger not avail on Android game pad
@@ -400,14 +396,6 @@ public class OVRPlayerController : MonoBehaviour
 				primaryAxis.y = Mathf.Round(primaryAxis.y * FixedSpeedSteps) / FixedSpeedSteps;
 				primaryAxis.x = Mathf.Round(primaryAxis.x * FixedSpeedSteps) / FixedSpeedSteps;
 			}
-
-			// Run with Controller
-			if (Vector2.Distance(OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick), _Vector2) >= 0.9)
-				moveInfluence *= 1.5f;
-
-			// Jump with Controller
-			if (OVRInput.GetDown(OVRInput.Button.One) && Controller.isGrounded)
-				Jump();
 
 			if (primaryAxis.y > 0.0f)
 				MoveThrottle += ort * (primaryAxis.y * transform.lossyScale.z * moveInfluence * Vector3.forward);
@@ -533,18 +521,16 @@ public class OVRPlayerController : MonoBehaviour
 	/// <summary>
 	/// Jump! Must be enabled manually.
 	/// </summary>
-	/// 
-
-
 	public bool Jump()
 	{
 		if (!Controller.isGrounded)
 			return false;
 
-			MoveThrottle += new Vector3(0, transform.lossyScale.y * JumpForce, 0);
+		MoveThrottle += new Vector3(0, transform.lossyScale.y * JumpForce, 0);
 
-			return true;
-	 }
+		return true;
+	}
+
 	/// <summary>
 	/// Stop this instance.
 	/// </summary>
