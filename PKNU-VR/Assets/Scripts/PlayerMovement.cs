@@ -4,10 +4,10 @@ using UnityEngine;
  
 public class PlayerMovement : MonoBehaviour {
 
-    public float speed = 3f;
+    public float speed = 1f;
     public float yVelocity = 0;
-    public float gravity = -15f;
-    public float jumpPower = 5f;
+    public float gravity = 15f;
+    public float jumpPower = 4f;
     private float h;
     private float v;
 
@@ -39,10 +39,10 @@ public class PlayerMovement : MonoBehaviour {
         controller.Move(dir * speed * Time.deltaTime);
 
         if (Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift))
-            speed = speed * 1.5f;
+            speed = speed * 4f;
 
         if (Input.GetKeyUp(KeyCode.LeftShift)||Input.GetKeyUp(KeyCode.RightShift))
-            speed = 5f;
+            speed = 1f;
 
 
     }

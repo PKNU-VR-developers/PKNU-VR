@@ -11571,10 +11571,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58d35d74e5601ac45846ed5553940d0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3
+  speed: 1.5
   yVelocity: 0
   gravity: 15
-  jumpPower: 5
+  jumpPower: 4
 --- !u!134 &746044719
 PhysicMaterial:
   m_ObjectHideFlags: 0
