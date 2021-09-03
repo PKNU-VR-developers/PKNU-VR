@@ -8,8 +8,8 @@ public class PlayerMovement : MonoBehaviour {
     public float yVelocity = 0;
     public float gravity = 15f;
     public float jumpPower = 4f;
-    private float h;
-    private float v;
+    private Vector3 h;
+    private Vector3 v;
 
     Vector3 dir;
 
@@ -31,9 +31,9 @@ public class PlayerMovement : MonoBehaviour {
           
            
         
-        h = Input.GetAxis("Horizontal");
-        v = Input.GetAxis("Vertical");
-        dir = new Vector3(h, yVelocity, v);
+        h = transform.right * Input.GetAxis("Horizontal");
+        v = transform.forward * Input.GetAxis("Vertical");
+        dir = new Vector3(0, yVelocity, 0)+ h + v;
 
 
         controller.Move(dir * speed * Time.deltaTime);
